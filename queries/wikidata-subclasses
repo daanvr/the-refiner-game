@@ -1,0 +1,13 @@
+SELECT ?subclass ?subclassLabel ?subclassDescription (COUNT(DISTINCT ?instance) AS ?instanceCount) WHERE {
+  ?subclass wdt:P279 wd:Q42889.
+  ?subclassBelow wdt:P279* ?subclass.
+  ?instance wdt:P31 ?subclassBelow.
+  
+  SERVICE wikibase:label {
+    bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".
+    ?subclass rdfs:label ?subclassLabel.
+    ?subclass schema:description ?subclassDescription.
+  }
+}
+GROUP BY ?subclass ?subclassLabel ?subclassDescription
+ORDER BY DESC(?instanceCount)

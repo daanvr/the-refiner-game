@@ -1,0 +1,7 @@
+SELECT ?file ?fileLabel ?image WHERE {
+  ?file wdt:P180/wdt:P279* wd:Q144.  # The file depicts a dog or a subclass of dog
+  ?file schema:contentUrl ?image.    # Get image URL (thumbnail or full)
+  
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+}
+LIMIT 100
